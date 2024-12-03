@@ -17,13 +17,7 @@ jobs:
         with:
           go-version: '1.22.2'
       - name: フォーマット
-        run: |
-          unformatted=$(gofmt -l .)
-          if [ -n "$unformatted" ]; then
-            echo "The following files are not properly formatted:"
-            echo "$unformatted"
-            exit 1
-          fi
+        run: test -z $(gofmt -l .)
       - name: 静的解析
         run: go vet ./...
       - name: テスト
