@@ -13,7 +13,7 @@ jobs:
       - name: チェックアウト
         uses: actions/checkout@v4
       - name: セットアップ
-        uses: setup-go@v5
+        uses: actions/setup-go@v5
         with:
           go-version: '1.22.2'
       - name: フォーマット
