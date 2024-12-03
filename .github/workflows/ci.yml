@@ -1,0 +1,26 @@
+name: ci
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    name: ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v4
+      - name: セットアップ
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22.2'
+      - name: フォーマット
+        run: test -z $(gofmt -l .)
+      - name: 静的解析
+        run: go vet ./...
+      - name: テスト
+        run: go test
+      - name: ビルド
+        run: go build .
